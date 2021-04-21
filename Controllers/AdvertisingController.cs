@@ -130,7 +130,7 @@ namespace AwtsAPI.Controllers
 
         [HttpPost("CMS/EditAdvertising")]
         [DisableRequestSizeLimit]
-        public async Task<IActionResult> EditAdvertising([FromForm] AdvertisingDTO request, IFormFile File)
+        public async Task<IActionResult> EditAdvertising([FromForm] AdvertisingDTO request)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace AwtsAPI.Controllers
                     return StatusCode((int)System.Net.HttpStatusCode.BadRequest, "Arabic Description Not Found!");
                 else
                 {
-                    var result = await _advertisingRepo.UpdateAsync(request,File);
+                    var result = await _advertisingRepo.UpdateAsync(request, request.File);
                     if (result != null)
                         return Ok(result);
                     else
